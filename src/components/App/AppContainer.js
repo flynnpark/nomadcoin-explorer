@@ -30,6 +30,11 @@ class App extends Component {
 
   _getData = async () => {
     const request = await axios.get(`${API_URL}/blocks`);
+    const blocks = request.data;
+    this.setState({
+      blocks,
+      isLoading: false
+    });
   };
 }
 
