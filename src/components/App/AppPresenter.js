@@ -30,9 +30,26 @@ const AppPresenter = ({ isLoading, blocks, transactions }) => (
       {!isLoading && (
         <Main>
           <Switch>
-            <Route exact path={`/`} component={Home} />
-            <Route exact path={`/blocks`} component={Blocks} />
-            <Route exact path={`/transactions`} component={Transactions} />
+            <Route
+              exact
+              path={`/`}
+              render={() => (
+                <Home
+                  blocks={blocks.slice(0, 5)}
+                  transactions={transactions.slice(0, 5)}
+                />
+              )}
+            />
+            <Route
+              exact
+              path={`/blocks`}
+              render={() => <Blocks blocks={blocks} />}
+            />
+            <Route
+              exact
+              path={`/transactions`}
+              render={() => <Transactions transactions={transactions} />}
+            />
           </Switch>
         </Main>
       )}
@@ -41,7 +58,9 @@ const AppPresenter = ({ isLoading, blocks, transactions }) => (
 );
 
 AppPresenter.propTypes = {
-  isLoading: PropTypes.bool.isRequired
+  isLoading: PropTypes.bool.isRequired,
+  blocks: PropTypes.array,
+  transactions: PropTypes.array
 };
 
 export default AppPresenter;
