@@ -6,6 +6,7 @@ import flatten from 'lodash.flatten';
 import AppPresenter from './AppPresenter';
 import typography from '../../typography';
 import { API_URL, WS_URL } from '../../constants';
+import { parseMessage } from '../../utils';
 
 const baseStyles = () => injectGlobal`
   ${reset};
@@ -45,7 +46,8 @@ class App extends Component {
   _connectToWs = () => {
     const ws = new WebSocket(WS_URL);
     ws.addEventListener('message', message => {
-      console.log(message);
+      const parsedMessage = parseMessage(message);
+      console.log(parsedMessage);
     });
   };
 }
